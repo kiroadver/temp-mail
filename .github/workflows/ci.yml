@@ -1,0 +1,23 @@
+name: Periksa proyek
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Instal dependensi
+        run: npm install
+      - name: Periksa sintaks
+        run: npm run check
+      - name: Uji logika dan adapter SQLite
+        run: npm test
+      - name: Bundel Worker tanpa deploy
+        run: npm run build:worker

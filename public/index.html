@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Email sementara tanpa akun. Terima pesan, salin OTP, lalu lanjutkan hari Anda.">
+  <meta name="referrer" content="no-referrer">
+  <title>Singgah — Email sebentar, tenang lebih lama.</title>
+  <script src="./theme.js"></script>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./config.js" defer></script>
+  <script src="./demo.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6 7a7 7 0 0 1 12-1l2 3M4 15l2 3a7 7 0 0 0 12-1"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m10 5-7 7 7 7M3 12h18"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.8 13A9 9 0 0 1 11 3.2 9 9 0 1 0 20.8 13Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m16 3 5 5L8 21H3v-5L16 3ZM13 6l5 5"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+  </svg>
+  <div id="demo-banner" class="demo-banner" hidden>
+    <span><strong>Pratinjau interaktif</strong> · Pesan contoh, bukan email sungguhan.</span>
+    <button id="demo-add" class="demo-button" type="button">+ Simulasikan email masuk</button>
+  </div>
+  <div class="page">
+    <header class="site-header">
+      <a href="#/inbox" class="brand" aria-label="Singgah, kembali ke kotak masuk">
+        <span class="brand-icon"><svg class="icon"><use href="#i-mail"/></svg></span>
+        <span>singgah<span class="brand-dot">.</span></span>
+      </a>
+      <div class="header-actions">
+        <span class="header-note">Tanpa akun. Tanpa repot.</span>
+        <button id="theme-toggle" type="button" class="icon-button" aria-label="Ganti tema">
+          <svg class="icon theme-moon"><use href="#i-moon"/></svg>
+          <svg class="icon theme-sun"><use href="#i-sun"/></svg>
+        </button>
+      </div>
+    </header>
+    <main>
+      <section class="intro">
+        <span class="eyebrow"><span class="little-line"></span> EMAIL SEMENTARA, SESUKAMU</span>
+        <h1>Email sebentar.<br><span>Tenang lebih lama.</span></h1>
+        <p>Satu alamat untuk hal-hal yang tidak perlu menetap.<br class="desktop-br"> Terima email dan ambil kode verifikasi, tanpa memberikan email utama.</p>
+      </section>
+
+      <section class="address-card" aria-labelledby="address-title">
+        <div class="card-heading">
+          <h2 id="address-title">ALAMAT EMAIL KAMU</h2>
+          <span id="mailbox-status" class="status-pill"><span class="status-dot"></span><span id="mailbox-status-text">Menghubungkan</span></span>
+        </div>
+        <div class="address-line">
+          <span class="address-icon"><svg class="icon"><use href="#i-mail"/></svg></span>
+          <output id="address" class="address-text" aria-live="polite">Menyiapkan alamat…</output>
+          <button id="copy-address" class="button primary" type="button" disabled><svg class="icon"><use href="#i-copy"/></svg><span>Salin alamat</span></button>
+        </div>
+        <div class="address-bottom">
+          <span class="retention"><svg class="icon"><use href="#i-clock"/></svg>Email terhapus setelah <strong id="ttl-hours">24 jam</strong></span>
+          <div class="address-actions">
+            <button id="new-address" class="text-button" type="button" disabled><svg class="icon"><use href="#i-refresh"/></svg>Ganti alamat</button>
+            <span class="divider"></span>
+            <button id="custom-address" class="text-button" type="button" disabled><svg class="icon"><use href="#i-edit"/></svg>Alamat custom</button>
+          </div>
+        </div>
+      </section>
+
+      <div id="error-banner" class="error-banner" role="alert" hidden>
+        <p id="error-text"></p><button id="retry" class="text-button" type="button">Coba lagi</button>
+      </div>
+      <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+      <section id="inbox-view" class="inbox-section" aria-labelledby="inbox-title">
+        <div class="inbox-toolbar">
+          <div class="inbox-heading"><h2 id="inbox-title">Kotak masuk</h2><span id="unread-count" class="count-badge" aria-label="0 pesan belum dibaca">0</span></div>
+          <div class="inbox-tools">
+            <span id="sync-status" class="sync-status">Memuat…</span>
+            <button id="refresh" class="icon-button small" type="button" aria-label="Segarkan kotak masuk" disabled><svg class="icon"><use href="#i-refresh"/></svg></button>
+            <button id="clear-inbox" class="icon-button small" type="button" aria-label="Hapus semua pesan" disabled><svg class="icon"><use href="#i-trash"/></svg></button>
+          </div>
+        </div>
+        <div class="mail-panel">
+          <div class="list-labels"><span>PESAN</span><span>TERBARU DI ATAS</span></div>
+          <div id="message-list" class="message-list"></div>
+          <div id="loading" class="skeleton-list" aria-label="Sedang memuat kotak masuk">
+            <div class="skeleton-row"><span></span><div><i></i><i></i></div></div>
+            <div class="skeleton-row"><span></span><div><i></i><i></i></div></div>
+            <div class="skeleton-row"><span></span><div><i></i><i></i></div></div>
+          </div>
+          <div id="empty-state" class="empty-state" hidden>
+            <div class="empty-illustration"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><svg class="icon"><use href="#i-mail"/></svg><span class="empty-spark">+</span></div>
+            <h3>Menunggu email masuk…</h3>
+            <p>Salin alamat di atas dan gunakan saat kamu membutuhkannya.<br>Pesan baru akan muncul di sini secara otomatis.</p>
+            <span class="waiting-label"><span class="status-dot"></span>Tidak perlu menekan refresh</span>
+          </div>
+        </div>
+        <div class="inbox-caption"><span><span class="status-dot"></span><span id="poll-caption">Diperbarui otomatis setiap 7 detik</span></span><span id="message-count">0 pesan</span></div>
+      </section>
+
+      <section id="detail-view" class="detail-view" aria-labelledby="message-subject" hidden>
+        <div class="detail-toolbar">
+          <button id="back-inbox" class="text-button" type="button"><svg class="icon"><use href="#i-arrow"/></svg>Kembali ke kotak masuk</button>
+          <button id="delete-message" class="text-button danger" type="button"><svg class="icon"><use href="#i-trash"/></svg>Hapus pesan</button>
+        </div>
+        <div id="detail-loading" class="detail-loading" hidden>Memuat pesan…</div>
+        <article id="message-article" class="message-article">
+          <h2 id="message-subject" tabindex="-1"></h2>
+          <div class="sender-detail"><div id="sender-avatar" class="sender-avatar"></div><div><strong id="message-from"></strong><div id="message-from-address" class="muted small-text"></div></div></div>
+          <dl class="message-meta"><div><dt>Kepada</dt><dd id="message-to"></dd></div><div><dt>Diterima</dt><dd id="message-date"></dd></div><div><dt>Kedaluwarsa</dt><dd id="message-expiry"></dd></div></dl>
+          <div id="otp-card" class="otp-card" hidden>
+            <div><span class="eyebrow">KODE VERIFIKASI TERDETEKSI</span><strong id="otp-value" class="otp-value"></strong></div>
+            <button id="copy-otp" class="button primary" type="button"><svg class="icon"><use href="#i-copy"/></svg>Salin kode</button>
+          </div>
+          <div id="links-card" class="links-card" hidden><h3>Link dari pesan ini</h3><p>Periksa domain tujuan sebelum membuka. Link ini belum diverifikasi.</p><div id="message-links"></div></div>
+          <div class="body-heading"><h3>Isi pesan</h3><button id="toggle-body" class="text-button" type="button">Lihat teks biasa</button></div>
+          <div class="safe-note"><svg class="icon"><use href="#i-shield"/></svg>Script, gambar eksternal, dan pelacak dinonaktifkan.</div>
+          <iframe id="message-frame" class="message-frame" title="Isi email dalam tampilan aman" sandbox="" referrerpolicy="no-referrer" hidden></iframe>
+          <pre id="message-text" class="message-text" hidden></pre>
+        </article>
+      </section>
+
+      <section class="benefits" aria-label="Tentang Singgah">
+        <div><span class="benefit-icon"><svg class="icon"><use href="#i-shield"/></svg></span><h3>Email utama tetap privat</h3><p>Tidak perlu membagikan alamat pribadi.</p></div>
+        <div><span class="benefit-icon"><svg class="icon"><use href="#i-copy"/></svg></span><h3>OTP tinggal salin</h3><p>Kode dan link penting, tanpa mencari-cari.</p></div>
+        <div><span class="benefit-icon"><svg class="icon"><use href="#i-clock"/></svg></span><h3>Sementara, sungguhan</h3><p>Pesan kedaluwarsa secara otomatis.</p></div>
+      </section>
+      <aside class="privacy-note"><svg class="icon"><use href="#i-shield"/></svg><p>Untuk hal sementara, bukan rahasia penting. Jangan gunakan untuk perbankan, data sensitif, atau akun yang ingin kamu simpan. Kunci kotak masuk disimpan di browser ini; menghapus data browser menghilangkan akses.</p></aside>
+    </main>
+    <footer><span class="footer-brand">singgah.</span><span>Datang, terima, lanjutkan.</span><span>Hanya menerima email <span class="footer-dot">·</span> Tanpa lampiran</span></footer>
+  </div>
+
+  <dialog id="custom-dialog" aria-labelledby="custom-title">
+    <form id="custom-form">
+      <div class="dialog-header"><h2 id="custom-title">Bikin alamat sendiri</h2><button class="icon-button" id="close-custom" type="button" aria-label="Tutup"><svg class="icon"><use href="#i-close"/></svg></button></div>
+      <p>Nama mudah diingat, tetap tanpa akun. Alamat yang sedang digunakan orang lain tidak bisa diambil.</p>
+      <label for="custom-username">Nama alamat</label><input id="custom-username" name="username" required minlength="3" maxlength="32" pattern="[a-zA-Z0-9][a-zA-Z0-9_-]{2,31}" placeholder="misalnya: singgahsebentar" autocomplete="off" autocapitalize="none" spellcheck="false">
+      <label for="custom-domain">Domain</label><select id="custom-domain" name="domain"></select>
+      <span class="input-hint">3–32 karakter. Huruf, angka, tanda - atau _.</span>
+      <p id="custom-error" class="form-error" role="alert"></p>
+      <button id="custom-submit" class="button primary full-width" type="submit">Gunakan alamat ini <svg class="icon"><use href="#i-chevron"/></svg></button>
+    </form>
+  </dialog>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+    <form method="dialog"><h2 id="confirm-title">Lanjutkan tindakan?</h2><p id="confirm-text"></p><div class="confirm-actions"><button class="button secondary" value="cancel">Batal</button><button class="button primary" value="confirm">Lanjutkan</button></div></form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden><svg class="icon"><use href="#i-check"/></svg><span id="toast-text"></span></div>
+  <noscript><div class="error-banner">Aktifkan JavaScript untuk menggunakan kotak masuk.</div></noscript>
+</body>
+</html>

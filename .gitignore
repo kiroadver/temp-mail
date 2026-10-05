@@ -1,0 +1,12 @@
+node_modules/
+.wrangler/
+.build/
+.dev.vars
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log
+coverage/
+test-results/
+playwright-report/

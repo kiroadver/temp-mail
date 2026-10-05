@@ -1,0 +1,21 @@
+{
+  "name": "singgah-temp-mail",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Email sementara tanpa akun, dengan Cloudflare Workers, Pages, Email Routing, dan D1.",
+  "engines": { "node": ">=22.16" },
+  "scripts": {
+    "dev": "wrangler dev",
+    "dev:web": "http-server public -p 8080 -c-1",
+    "deploy": "wrangler deploy",
+    "deploy:web": "wrangler pages deploy public",
+    "db:local": "wrangler d1 execute temp-mail-db --local --file=schema.sql",
+    "db:remote": "wrangler d1 execute temp-mail-db --remote --file=schema.sql",
+    "test": "node --test",
+    "check": "node --check src/worker.js && node --check src/extract.js && node --check public/app.js && node --check public/demo.js",
+    "build:worker": "wrangler deploy --dry-run --outdir .build"
+  },
+  "dependencies": { "postal-mime": "2.4.3" },
+  "devDependencies": { "wrangler": "^4.0.0", "http-server": "14.1.1" }
+}

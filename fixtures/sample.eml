@@ -1,0 +1,29 @@
+From: Tim Contoh <hello@sender.example>
+To: contoh@example.com
+Subject: Kode verifikasi kamu: 482916
+Date: Mon, 05 Oct 2026 11:48:45 +0000
+Message-ID: <singgah-test-482916@sender.example>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="singgah-boundary"
+
+--singgah-boundary
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+
+Halo!
+
+Kode verifikasi kamu: 482916
+Link konfirmasi: https://example.com/verify?token=contoh123
+
+Ini hanya pesan pengujian. Kode berlaku 10 menit.
+
+--singgah-boundary
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+
+<h2>Halo, selamat datang!</h2>
+<p>Kode verifikasi kamu:</p>
+<h1>482916</h1>
+<p><a href="https://example.com/verify?token=contoh123">Konfirmasi email</a></p>
+<p>Ini hanya pesan pengujian. Kode berlaku 10 menit.</p>
+--singgah-boundary--
