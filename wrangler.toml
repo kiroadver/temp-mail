@@ -5,7 +5,7 @@ workers_dev = true
 
 [vars]
 # Ganti dengan domain Email Routing milik Anda, dipisah koma jika lebih dari satu.
-MAIL_DOMAINS = "example.com"
+MAIL_DOMAINS = "wanzabigail.my.id"
 # Origin PERSIS, tanpa slash di akhir; jangan memakai * pada produksi.
 ALLOWED_ORIGINS = "http://localhost:8080,http://127.0.0.1:8080"
 EMAIL_TTL_HOURS = "24"
