@@ -4,6 +4,6 @@
  * Tidak ada secret Cloudflare ataupun token kotak masuk di file ini.
  */
 window.TEMPMAIL_CONFIG = {
-  apiBase: "http://localhost:8787",
+  apiBase: "https://singgah-temp-mail.wanzabigail.my.id",
   demo: false
 };
