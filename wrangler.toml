@@ -21,7 +21,7 @@ CREATE_LIMIT_PER_HOUR = "20"
 binding = "DB"
 database_name = "temp-mail-db"
 # Nilai konfigurasi wajib: salin UUID hasil `npx wrangler d1 create temp-mail-db`.
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "33ae6d8d-678c-48e2-8f88-9693baabb40b"
 
 [triggers]
 crons = ["*/5 * * * *"]
