@@ -6,7 +6,7 @@ routes = [{ pattern = "singgah-temp-mail.wanzabigail.my.id", custom_domain = tru
 
 [vars]
 MAIL_DOMAINS = "wanzabigail.my.id"
-ALLOWED_ORIGINS = "https://temp-mail.pages.dev"
+ALLOWED_ORIGINS = "https://temp-mail-bwh.pages.dev"
 EMAIL_TTL_HOURS = "24"
 MAILBOX_TTL_HOURS = "168"
 MAX_EMAILS_PER_ADDRESS = "50"
