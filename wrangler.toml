@@ -2,12 +2,11 @@ name = "singgah-temp-mail"
 main = "src/worker.js"
 compatibility_date = "2025-04-01"
 workers_dev = true
+routes = [{ pattern = "singgah-temp-mail.wanzabigail.my.id", custom_domain = true }]
 
 [vars]
-# Ganti dengan domain Email Routing milik Anda, dipisah koma jika lebih dari satu.
 MAIL_DOMAINS = "wanzabigail.my.id"
-# Origin PERSIS, tanpa slash di akhir; jangan memakai * pada produksi.
-ALLOWED_ORIGINS = "http://localhost:8080,http://127.0.0.1:8080"
+ALLOWED_ORIGINS = "https://NAMA-PAGES.pages.dev"
 EMAIL_TTL_HOURS = "24"
 MAILBOX_TTL_HOURS = "168"
 MAX_EMAILS_PER_ADDRESS = "50"
@@ -20,7 +19,6 @@ CREATE_LIMIT_PER_HOUR = "20"
 [[d1_databases]]
 binding = "DB"
 database_name = "temp-mail-db"
-# Nilai konfigurasi wajib: salin UUID hasil `npx wrangler d1 create temp-mail-db`.
 database_id = "33ae6d8d-678c-48e2-8f88-9693baabb40b"
 
 [triggers]
